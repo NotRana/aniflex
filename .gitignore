@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build output
+build/
+
+# Environment variables
+.env
+
+# Testing coverage reports
+coverage/
+
+# IDE specific files
+.idea/
+
+# Temporary files created by npm
+npm-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS specific temporary or log files
+*.pid
+*.log
