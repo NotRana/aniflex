@@ -1,0 +1,125 @@
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Admin Dashboard</title>
+              <!-- Include Tailwind CSS -->
+              <script src="https://cdn.tailwindcss.com"></script>
+              <!-- Dark Theme Styles -->
+              <style>
+                  input {
+                      background: transparent;
+                  }
+
+                  textarea {
+                      background: transparent;
+                  }
+
+                  body {
+                      background-color: #1a202c;
+                      color: #e2e8f0;
+                  }
+
+                  .sidebar {
+                      background-color: #2d3748;
+                      transition: width 0.3s;
+                  }
+
+                  .sidebar-item {
+                      transition: background-color 0.3s;
+                  }
+
+                  .sidebar-item:hover {
+                      background-color: #4a5568;
+                  }
+
+                  .sidebar-item.active {
+                      background-color: #4a5568;
+                  }
+
+                  @media (max-width: 768px) {
+                      #sidebarToggle {
+                          display: block;
+                      }
+
+                      .sidebar {
+                          display: none;
+                          width: 64px;
+                      }
+
+                      .sidebar-open {
+                          display: block;
+                          width: 240px;
+                      }
+
+                      .sidebar-open .sidebar-close {
+                          display: block;
+                      }
+                  }
+              </style>
+          </head>
+          <body class="font-sans antialiased">
+              <!-- Sidebar -->
+              <%- include('sider') %>
+
+              <!-- Main Content -->
+              <div class="flex flex-col flex-1">
+                  <div class="bg-gray-800 px-4 py-3">
+                      <!-- Responsive Sidebar Toggle Button -->
+                      <button class="text-white focus:outline-none md:hidden" id="sidebarToggle">
+                          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                          </svg>
+                      </button>
+                      <h2 class="text-lg font-semibold text-white">Create New Anime</h2>
+                  </div>
+                  <p>this would be all anime shown</p>
+                  <div id="data" class="flex flex-wrap">
+                      <% all_anime.forEach(val => { %>
+                          <div class="w-auto max-w-[120px] overflow-auto h-auto m-2 p-2 border-2 border-white-500">
+                              <img src="<%= val.image %>">
+                              <input type="text" class="hidden anime-id" value="<%= val._id %>">
+                              <p><%= val.name %></p>
+                              <button class="rounded border-2 border-white-500 copy-btn" onclick="copyText(this)">Copy Anime ID</button>
+                          </div>
+                      <% }) %>
+                  </div>
+              </div>
+
+              <script>
+                  const sidebarToggle = document.getElementById("sidebarToggle");
+                  const sidebarClose = document.getElementById("sidebarClose");
+                  const sidebar = document.querySelector(".sidebar");
+                  const mainContent = document.querySelector(".main-content");
+
+                  sidebarToggle.addEventListener("click", () => {
+                      sidebar.classList.toggle("sidebar-open");
+                  });
+
+                  sidebarClose.addEventListener("click", () => {
+                      sidebar.classList.remove("sidebar-open");
+                      mainContent.classList.remove("main-content-open");
+                  });
+
+                  function copyText(button) {
+                      // Find the input element within the parent div
+                      const inputElement = button.parentElement.querySelector('.anime-id');
+
+                      // Get the text to copy from the input element
+                      const textToCopy = inputElement.value;
+
+                      // Copy the text to the clipboard
+                      navigator.clipboard.writeText(textToCopy)
+                          .then(() => {
+                              console.log("Text copied to clipboard:", textToCopy);
+                              alert("Text copied to clipboard!");
+                          })
+                          .catch((error) => {
+                              console.error("Error copying text:", error);
+                              alert("Error copying text. Please try again.");
+                          });
+                  }
+              </script>
+          </body>
+          </html>

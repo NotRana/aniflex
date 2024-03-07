@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="../public/css/style.main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Anime Detail Page</title>
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <%- include('nav') %>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex flex-wrap justify-center">
+        <!-- Anime Poster -->
+        <img src="<%= anime.image %>" alt="Anime poster" class="w-64 h-auto mr-4">
+
+        <!-- Anime Details -->
+        <div class="flex-1">
+            <h2 class="text-3xl font-bold mb-2"><%= anime.name %></h2>
+            
+            
+            <p><span class="font-semibold">Genres:</span><%= anime.genres %></p>
+            <p><span class="font-semibold">Release Date:</span><%= anime.release_date %></p>
+            
+            <p class="mt-4"><%= anime.description %></p>
+        </div>
+
+        <!-- Episode List -->
+        <div class="w-full mt-8">
+            <h3 class="text-2xl font-semibold mb-4">Episodes</h3>
+            <div class="grid grid-cols-1 gap-4">
+                <% episodes.forEach(episode => { %>
+                    <div class="bg-[#08080F] p-4 rounded-md">
+                        <h4 class="text-lg font-semibold"><%= episode.ep_no %>: <%= episode.title %></h4>
+                        <p class="text-sm mt-2">Synopsis: <%= episode.synopsis %></p>
+                        <p class="text-sm mt-2">Video URL: <a href="<%= episode.video_url %>" target="_blank" class="text-blue-500 hover:underline"><%= episode.video_url %></a></p>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <%- include('footer') %>
+</body>
+</html>

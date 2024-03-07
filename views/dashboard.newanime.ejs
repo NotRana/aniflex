@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Dark Theme Styles -->
+  <style>
+    input{
+      
+      background:transparent;
+    }
+    textarea{
+      
+      background:transparent;
+    }
+    body {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    .sidebar {
+      background-color: #2d3748;
+      transition: width 0.3s;
+    }
+    .sidebar-item {
+      transition: background-color 0.3s;
+    }
+    .sidebar-item:hover {
+      background-color: #4a5568;
+    }
+    .sidebar-item.active {
+      background-color: #4a5568;
+    }
+    @media (max-width: 768px) {
+      #sidebarToggle{
+        display: block;
+      }
+      .sidebar {
+        display: none;
+        width: 64px;
+      }
+      .sidebar-open {
+        display: block;
+        width: 240px;
+      }
+      .sidebar-open .sidebar-close {
+
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Sidebar -->
+  <%- include('sider') %>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1">
+      <div class="bg-gray-800 px-4 py-3">
+        <!-- Responsive Sidebar Toggle Button -->
+        <button class="text-white focus:outline-none md:hidden" id="sidebarToggle">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <h2 class="text-lg font-semibold text-white">Create New Anime</h2>
+      </div>
+      <div class="p-6 flex-1">
+        <!-- Add New Anime Form -->
+        <form id="addAnimeForm" class="bg-grey text-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label for="animeName" class="block text-white text-sm font-bold mb-2">Anime Name</label>
+            <input id="animeName" name="animeName" type="text" placeholder="Enter anime name" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" required>
+          </div>
+          <div class="mb-4">
+            <label for="animeImage" class="block text-white text-sm font-bold mb-2">Anime Image</label>
+            <input id="animeImage" name="animeImage" type="file" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" required>
+          </div>
+          <div class="mb-6">
+            <label for="animeDescription" class="block text-white text-sm font-bold mb-2">Anime Description</label>
+            <textarea id="animeDescription" name="animeDescription" placeholder="Enter anime description" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label for="release_date" class="block text-white text-sm font-bold mb-2">Release Date</label>
+            <input id="release_date" name="release_date" type="date"  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" required>
+          </div>
+          
+          <div class="mb-4">
+            <label for="genres" class="block text-white text-sm font-bold mb-2">Genres</label>
+            <select class="bg-transparent text-white border-1 border-white-500" name="genres" id="genresSelect">
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="cars">Cars</option>
+              <option value="comedy">Comedy</option>
+            </select>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add Anime</button>
+            
+            <!-- Success Message Component -->
+      
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to toggle sidebar -->
+  <script>
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarClose = document.getElementById("sidebarClose");
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("sidebar-open");
+      // mainContent.classList.toggle("main-content-open");
+    });
+
+    sidebarClose.addEventListener("click", () => {
+      sidebar.classList.remove("sidebar-open");
+      mainContent.classList.remove("main-content-open");
+    });
+
+    const addAnimeForm = document.getElementById("addAnimeForm");
+    addAnimeForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      
+      const animeName = document.getElementById("animeName").value;
+      const animeDescription = document.getElementById("animeDescription").value;
+      const animeImage = document.getElementById("animeImage").files[0]
+      const genres = document.getElementById("genresSelect").value
+      const release_date = document.getElementById("release_date").value
+      try {
+        const imageUrl = await uploadImage(animeImage);
+        const response = await fetch('/admin/dashboard/newanime', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: animeName,
+            description: animeDescription,
+            image: imageUrl,
+            genres: genres,
+            release_date:release_date
+          })
+        });
+
+        if (response.ok) {
+          console.log('Anime added successfully');
+          alert("post uploaded successfully")
+          
+        } else {
+          alert('Failed to add anime')
+          throw new Error('Failed to add anime');
+        }
+      } catch (error) {
+        alert('Error adding anime:', error)
+        console.error('Error adding anime:', error);
+      }
+    });
+
+    async function uploadImage(imageFile) {
+      try {
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+        const response = await fetch('/upload', {
+          method: 'POST',
+          body: formData
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data.imageUrl);
+          return data.imageUrl;
+        } else {
+          throw new Error('Failed to upload image');
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        return null;
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Include Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Dark Theme Styles -->
+  <style>
+    body {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    .sidebar {
+      background-color: #2d3748;
+      transition: width 0.3s;
+    }
+    .sidebar-item {
+      transition: background-color 0.3s;
+    }
+    .sidebar-item:hover {
+      background-color: #4a5568;
+    }
+    .sidebar-item.active {
+      background-color: #4a5568;
+    }
+    @media (max-width: 768px) {
+      #sidebarToggle{
+        display: block;
+      }
+      .sidebar {
+        display: none;
+        width: 64px;
+      }
+      .sidebar-open {
+        display: block;
+        width: 240px;
+      }
+      .sidebar-open .sidebar-close {
+
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Sidebar -->
+    <%- include('sider') %>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1">
+      <div class="bg-gray-800 px-4 py-3">
+        <!-- Responsive Sidebar Toggle Button -->
+        <button class="text-white focus:outline-none md:hidden" id="sidebarToggle">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <h2 class="text-lg font-semibold text-white">Dashboard</h2>
+      </div>
+      <div class="p-6 flex-1">
+        <!-- Your dashboard content goes here -->
+        <p class="text-white">Welcome to the admin dashboard!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to toggle sidebar -->
+  <script>
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarClose = document.getElementById("sidebarClose");
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("sidebar-open");
+      // mainContent.classList.toggle("main-content-open");
+    });
+
+    sidebarClose.addEventListener("click", () => {
+      sidebar.classList.remove("sidebar-open");
+      mainContent.classList.remove("main-content-open");
+    });
+  </script>
+
+</body>
+</html>

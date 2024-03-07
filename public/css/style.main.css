@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  /* background-color: rgb(0, 0, 0); */
+}
+
+i {
+  color: white;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  width: 33%;
+}
+
+.logo {
+  width: 70px;
+  margin-left: 20px;
+}
+
+.nav-main {
+  z-index: 11;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: rgb(8, 8, 15);
+}
+
+.nav-middle {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-right {
+  width: 33%;
+}
+
+.nav-right i {
+  margin-top: 12px;
+  float: right;
+}
+
+footer {
+  width: 100%;
+  height: 50px;
+  color: lightgrey;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.1px solid grey;
+}
+
+/* Style the menu toggle icon */
+#menu-icon {
+  cursor: pointer;
+}
+
+/* Initially hide the menu */
+.menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+}
+
+/* Your existing menu styles */
+.menu.show-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: rgb(14, 7, 28);
+  position: absolute;
+  top: 50px;
+  right: 0;
+  width: 150px;
+}
+
+.menu.show-menu a {
+  color: #031400;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 18px;
+  text-align: right;
+  width: 100%;
+}
+
+.menu.show-menu a:hover {
+  color: #ff9900;
+}
+
+
+
+.latest-anime {
+  display:flex;
+  display: flex;
+  overflow-y: scroll
+}
+
+.latest-anime >a {
+  min-width:150px;
+  width:150px;
+}
+
+.card {
+  height: 200px;
+  background: transparent;
+  border: 0.1px solid #6b6967;
+  border-radius: 1px;
+  width: auto;
+  max-width: 180px;
+  margin: 40px 10px;
+  text-decoration: none;
+}
+
+.card > img {
+  width: 100%;
+  padding: 2px;
+  height: 80%;
+}
+
+.card > .title {
+  padding: 5px 10px;
+}
+
+.jumper {
+  background-color: transparent;
+  color: orange;
+  position: fixed;
+  right: 20px;
+  bottom: 55px;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: 60px;
+}
+
+.active {
+  width: 100%;
+  height: 200px;
+  background-color: rgb(8, 8, 15);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.menu li {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.menu li a {
+  text-decoration: none;
+}
+
+.visit {
+  text-decoration: none;
+  color: lightgrey;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 0.2px solid grey;
+  border-radius: 10px;
+  width: 370px;
+  height: 30px;
+  margin: 20px auto;
+  font-family: "Gilroy-Light";
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  /* Align icons in the center horizontally */
+  margin-top: 10px;
+  /* Add some margin from the search bar */
+}
+
+.social-icons a {
+  margin: 0 10px;
+  text-decoration: none;
+
+  /* Add some spacing between icons */
+}
+
+.social-icons img {
+  width: 40px;
+  /* Adjust the width of the icons */
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Align items in the center horizontally */
+  margin-bottom: 1px;
+}
+
+#searchInput {
+  margin-top: 10px;
+  margin-left: 2px;
+  margin-right: 2px;
+  width: 350px;
+  height: 30px;
+  margin-bottom: 1px;
+  background-color: rgb(24, 27, 31);
+  color: lightgrey;
+}
+
+.nsbt {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.banner-img {
+  margin-right: 5px;
+  margin-left: 5px;
+  width: 389px;
+  height: 140px;
+  display: flex;
+}
+
+.para {
+  margin: 10px;
+}
+
+.ubpt {
+  border: 2px Purple;
+  border-radius: 10px;
+}
+
+.ubpt p {
+  color: lightgrey;
+  font-size: 15px;
+  margin-left: 2px;
+  margin-top: 5px;
+}
+
+i {
+  font-size: 25px;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+/* Delete Krdena Jarurat Pade to */
+a:active {
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+.ri-search-line{
+  cursor:pointer;
+}
+.searchbox{
+  display:none;
+  position:absolute;
+  top:12px;
+  right:95px;
+}
+.search-active{
+  display:block;
+}
+
+.searchbox > button{
+  background: transparent;
+  border-radius:5px;
+  border-color:white;
+  padding:7px;
+}
+.searchbox > input{
+  background:transparent;
+  border-radius:5px;
+  border-color:white;
+  padding:7px;
+  
+}
+
+.popular-anime{
+  display:flex;
+  display: flex;
+  overflow-y: scroll
+}
+.popular-anime > a{
+  min-width:150px;
+  width:150px;
+}

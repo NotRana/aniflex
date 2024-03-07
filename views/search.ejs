@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./public/css/style.main.css">
+    <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
+    <title><%= config.name %></title>
+</head>
+<body style="background:black;">
+    <%- include('nav') %>
+    <div class="content">
+      <div id="searchResults" class="latest-anime" style="overflow:auto;">
+        <h3>Search Result</h3>
+        <div class="latest-anime" style="overflow:auto;">
+          <% results.forEach(val => { %>
+            <a href="/anime/<%= val._id %>">
+            <div class="card">
+              <img src="<%= val.image %>" alt="jgfkjfbsj">
+              <p class="title"><%= val.name %></p>
+            </div>
+            </a>
+          <% }); %>
+
+        </div>
+      </div>
+    </div>
+    <%- include('footer') %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./public/js/scripts.js"></script>
+</body>
+</html>
