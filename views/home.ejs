@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./public/css/style.main.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/home.css">
+    <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
+    <title><%= config.name %></title>
+</head>
+<body style="background:black;">
+    <%- include('nav') %>
+      <br />
+      <div class=nvm>
+      </div>
+      <div class="banner">
+        <div class="search-container">
+          <form id="searchForm" style="margin-top:12px; color:white;" action="/search" method="GET">
+            <input type="text" placeholder=" 🔎  Search Anime....." style="background:transparent; padding: 5px;
+              border-radius: 5px;" id="searchQuery" name="q">
+            <button type="submit" style="background:transparent; padding:5px; border-radius:5px;" id="searchButton" class="">search</button>
+          </form>
+        </div>
+        <br />
+        <br />
+        <br />
+        <img src="/public/img/banner.jpg" alt="banner" class="banner-img">
+        <br />
+        <div class="social-icons">
+          <a href="https://discord.com/invite/BYHEHkN4VY"><i class="ri-discord-fill"></i></a>
+          <a href="https://instagram.com/"><i class="ri-instagram-line"></i></a>
+          <a href="https://youtube.com/"><i class="ri-youtube-fill"></i></a>
+        </div>
+        <br />
+      </div>
+      <a href="/home" class="visit"> Visit Homepage</a>
+      <br />
+      <div class=ubpt>
+        <h4>
+          WATCH ANIME-FREE
+        </h4>
+        <br />
+        <p>
+          AstroFlix, A Free Anime Streaming Website Allows You To Watch English Subtitled And Hindi dubbed Anime Videos
+          Online For Free In High Quality And Resolution, With Many Features, You Can Suggest Us On More Features And
+          Missing Animes On Our Discord, There You Can Also Communicate With Other Anime Viewers, You Can Report Us Bugs
+          There ,
+
+        </p>
+        <br />
+        <br />
+        <br />
+      </div>
+    <%- include('footer') %>
+</body>
+</html>

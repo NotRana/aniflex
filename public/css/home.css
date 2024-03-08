@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +11,7 @@ html,
 body {
   width: 100%;
   height: 100%;
-  /* background-color: rgb(0, 0, 0); */
+  background-color: rgb(26, 24, 31);
 }
 
 i {
@@ -30,14 +30,12 @@ i {
 }
 
 .nav-main {
-  z-index: 11;
   display: flex;
   width: 100%;
   height: 60px;
   position: sticky;
   top: 0;
   left: 0;
-  background: rgb(8, 8, 15);
 }
 
 .nav-middle {
@@ -68,6 +66,7 @@ footer {
   align-items: center;
   justify-content: center;
   border: 0.1px solid grey;
+
 }
 
 /* Style the menu toggle icon */
@@ -87,7 +86,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: rgb(14, 7, 28);
+  background-color: rgb(228, 0, 120);
   position: absolute;
   top: 50px;
   right: 0;
@@ -95,7 +94,7 @@ footer {
 }
 
 .menu.show-menu a {
-  color: #031400;
+  color: lightgrey;
   text-decoration: none;
   padding: 10px;
   font-size: 18px;
@@ -107,59 +106,52 @@ footer {
   color: #ff9900;
 }
 
-
-
-.latest-anime {
-  display:flex;
+.popular-anime {
   display: flex;
-  overflow-y: scroll
+  flex-wrap: wrap;
 }
 
-.latest-anime >a {
-  min-width:150px;
-  width:150px;
+.latest-anime {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .card {
-  height: auto;
-  max-height:300px;
+  height: 200px;
   background: transparent;
-  border: 0.1px solid #6b6967;
-  border-radius: 1px;
-  width: auto;
-  max-width: 180px;
-  margin: 40px 10px;
-  text-decoration: none;
+  border: 2px solid purple;
+  border-radius: 10px;
+  width: 100px;
+  margin: 20px 10px;
 }
 
-.card > img {
-  width: 100%;
+.card>img {
+  width: 90px;
   padding: 2px;
   height: 80%;
 }
 
-.card > .title {
+.card>.title {
   padding: 5px 10px;
 }
 
 .jumper {
-  background-color: transparent;
-  color: orange;
+  background-color: Aqua;
+  color: darkgrey;
   position: fixed;
   right: 20px;
-  bottom: 55px;
+  bottom: 20px;
   text-decoration: none;
   padding: 14px;
   border-radius: 50px;
   width: 50px;
   height: 50px;
-  font-size: 60px;
 }
 
 .active {
   width: 100%;
   height: 200px;
-  background-color: rgb(8, 8, 15);
+  background-color: rgb(45, 42, 46);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -189,7 +181,8 @@ footer {
   width: 370px;
   height: 30px;
   margin: 20px auto;
-  font-family: "Gilroy-Light";
+
+
 }
 
 .social-icons {
@@ -231,14 +224,15 @@ footer {
   color: lightgrey;
 }
 
+
 .nsbt {
   text-align: center;
   margin-top: 20px;
 }
 
 .banner-img {
-  margin-right: 5px;
-  margin-left: 5px;
+  margin:auto;
+
   width: 389px;
   height: 140px;
   display: flex;
@@ -251,6 +245,7 @@ footer {
 .ubpt {
   border: 2px Purple;
   border-radius: 10px;
+
 }
 
 .ubpt p {
@@ -258,61 +253,4 @@ footer {
   font-size: 15px;
   margin-left: 2px;
   margin-top: 5px;
-}
-
-i {
-  font-size: 25px;
-}
-
-.menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-}
-/* Delete Krdena Jarurat Pade to */
-a:active {
-  text-decoration: none;
-}
-a:link {
-  text-decoration: none;
-}
-a:visited {
-  text-decoration: none;
-}
-.ri-search-line{
-  cursor:pointer;
-}
-.searchbox{
-  display:none;
-  position:absolute;
-  top:12px;
-  right:95px;
-}
-.search-active{
-  display:block;
-}
-
-.searchbox > button{
-  background: transparent;
-  border-radius:5px;
-  border-color:white;
-  padding:7px;
-}
-.searchbox > input{
-  background:transparent;
-  border-radius:5px;
-  border-color:white;
-  padding:7px;
-  
-}
-
-.popular-anime{
-  display:flex;
-  display: flex;
-  overflow-y: scroll
-}
-.popular-anime > a{
-  min-width:150px;
-  width:150px;
 }

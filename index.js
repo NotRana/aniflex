@@ -24,13 +24,21 @@ app.use("/upload", upload);
 app.use("/anime", anime);
 
 
-app.get("/", async(req, res) => {
+app.get("/home", async(req, res) => {
   const populer = await animeCreate.find({}).sort({views: -1}).limit(10).exec()
   const latest = await animeCreate.find({}).sort({release_date: -1}).limit(10).exec()
     
       // populer now contains an array of objects
     res.render("index", { config, populer,latest });
     
+});
+
+app.get("/", async(req, res) => {
+  
+
+      // populer now contains an array of objects
+  res.render("home", { config });
+
 });
 
 
@@ -47,7 +55,14 @@ app.get("/search", async (req, res) => {
   }
 });
 
-
+app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
+  const anime_id = req.params.anime_id;
+  const anime_ep = req.params.anime_ep;
+  const anime = await addEp.findOne({anime_id:anime_id,ep_no:anime_ep}).exec()
+  // console.log(anime)
+  const recomend = await addEp.find({anime_id: anime_id, ep_no:{$ne: anime_ep}}).sort({ep_no:1}).limit(5).exec()
+  res.render("play.ejs",{config ,anime,recomend})
+})
 
 
 app.listen(port, () => {
