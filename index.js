@@ -12,7 +12,7 @@ const anime = require("./routers/anime.js")
 let port = config.port;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use("/public", express.static("public"));
+app.use("/public", express.static(__dirname + "public"));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
