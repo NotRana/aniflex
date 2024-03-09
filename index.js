@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require("path")
 const config = require("./config.json");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -10,6 +11,7 @@ const addEp = require("./models/addEp.js")
 const anime = require("./routers/anime.js")
 let port = config.port;
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 app.use("/public", express.static("public"));
 
 app.use(bodyParser.json());
