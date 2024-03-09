@@ -60,7 +60,7 @@ app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
   const anime_ep = req.params.anime_ep;
   const anime = await addEp.findOne({anime_id:anime_id,ep_no:anime_ep}).exec()
   // console.log(anime)
-  const recomend = await addEp.find({anime_id: anime_id, ep_no:{$ne: anime_ep}}).sort({ep_no:1}).limit(5).exec()
+  const recomend = await addEp.find({anime_id: anime_id, ep_no:{$gt: anime_ep}}).sort({ep_no:1}).limit(5).exec()
   res.render("play.ejs",{config ,anime,recomend})
 })
 
@@ -68,3 +68,4 @@ app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
 app.listen(port, () => {
   console.log(`anime website is runnig on ${port} `);
 });
+module.exports = app;
