@@ -237,8 +237,8 @@ footer {
 }
 
 .banner-img {
-  margin-right: 5px;
-  margin-left: 5px;
+  margin:auto;
+  
   width: 389px;
   height: 140px;
   display: flex;
@@ -294,13 +294,13 @@ a:visited {
 }
 
 .searchbox > button{
-  background: transparent;
+  background: rgb(8, 8, 15);
   border-radius:5px;
   border-color:white;
   padding:7px;
 }
 .searchbox > input{
-  background:transparent;
+  background:rgb(8, 8, 15);
   border-radius:5px;
   border-color:white;
   padding:7px;
