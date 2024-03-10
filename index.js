@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect(config.mongodb);
+mongoose.connect(config.mongodb || process.env.MONGODB_URI);
 
 // Router Here
 app.use("/admin", admin);
