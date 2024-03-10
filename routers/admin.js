@@ -56,7 +56,7 @@ router.get("/dashboard", (req, res) => {
 router.get("/dashboard/newanime", (req, res) => {
   if (req.session.adminLoggedIn) {
     // Admin is logged in, render the dashboard
-    res.render("dashboard.newanime.ejs", { successfull:"" })
+    res.render("dashboard.newanime.ejs", { config:config,successfull:"" })
   } else {
     // Admin is not logged in, redirect to login page
     res.redirect("/admin/login");
@@ -96,7 +96,7 @@ router.get("/dashboard/addep", (req, res) =>{
   if (req.session.adminLoggedIn){
     // const anime_id = req.params.id;
     // const anime = await animeCreate.findOne({_id:anime_id})
-    res.render("dashboard.animeaddep.ejs")
+    res.render("dashboard.animeaddep.ejs",{config})
   }else{res.redirect('/admin/login')}
 })
 

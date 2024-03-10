@@ -7,5 +7,6 @@
   "admin":{
     "username": "admin",
     "password": "admin"
-  }
+  },
+  "upload_api":"https://rightful-possible-rainforest.glitch.me/upload"
 }
