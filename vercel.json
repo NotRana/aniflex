@@ -10,7 +10,7 @@
     }
   ],
   "functions": {
-    "/": {
+    "index.js": {
       "memory": 512,
       "maxDuration": 60
     }
