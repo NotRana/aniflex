@@ -1,59 +1,198 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/public/css/style.main.css">
-    <link type="text/css" href="/public/css/home.css">
-    <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
-    <title><%= config.name %></title>
-</head>
-<body style="background:black;">
-    <%- include('nav') %>
-      <br />
-      <div class=nvm>
-      </div>
-      <div class="banner">
-        <div class="search-container">
-          <form id="searchForm" style="margin-top:12px; color:white;" action="/search" method="GET">
-            <input type="text" placeholder="Search Anime....." style="background:transparent; padding: 5px;
-              border-radius: 5px;" id="searchQuery" name="q">
-            <button type="submit" style="background:transparent; padding:5px; border-radius:5px;" id="searchButton" class="">search</button>
-          </form>
-        </div>
-        <br />
-        <br />
-        <br />
-        <img src="/public/img/banner.jpg" alt="banner" class="banner-img">
-        <br />
-        <div class="social-icons">
-          <a href="https://discord.com/invite/BYHEHkN4VY"><i class="ri-discord-fill"></i></a>
-          <a href="https://instagram.com/"><i class="ri-instagram-line"></i></a>
-          <a href="https://youtube.com/"><i class="ri-youtube-fill"></i></a>
-        </div>
-        <br />
-      </div>
-      <a href="/home" class="visit"> Visit Homepage</a>
-      <br />
-      <div class=ubpt>
-        <h4>
-          WATCH ANIME-FREE
-        </h4>
-        <br />
-        <p>
-          AstroFlix, A Free Anime Streaming Website Allows You To Watch English Subtitled And Hindi dubbed Anime Videos
-          Online For Free In High Quality And Resolution, With Many Features, You Can Suggest Us On More Features And
-          Missing Animes On Our Discord, There You Can Also Communicate With Other Anime Viewers, You Can Report Us Bugs
-          There ,
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>AstroFlix</title>
+    <meta
+      name="title"
+      content="AstroFlix the best way to watch hindi anime"
+    />
+    <meta
+      name="thumbnail"
+      content="https://raw.githubusercontent.com/NotRana/aniflex/main/public/img/brand_image.png"
+    />
+    <meta
+      name="keywords"
+      content="anime, crunchyroll, netflix"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="/public/css/output.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/public/css/style.css"
+    />
+  </head>
+  <body class="bg-[#201f31] text-white absolute">
+    <nav
+      class="sm:pt-[80px]     navbar text-white mb-[20px] "
+    >
+    <i class="ri-menu-line sm:hidden text-[25px] m-6 mt-6 cursor-pointer"></i>
+      <ul class="menu sm:flex sm:flex-row flex-col absolute bg-[#0b0b0bcc]  sm:bg-inherit sm:top-0 sm:left-0 sm:static justify-center sm:p-0 p-[100px] rounded-lg hidden">
+        <li class="text-[20px] mx-[20px] my-0"><a
+            href="/">Home</a></li>
+        <li class="text-[20px] mx-[20px] my-0"><a
+            href="/">Support</a></li>
+        <li class="text-[20px] mx-[20px] my-0"><a
+            href="/">Discord</a></li>
+      </ul>
+    </nav>
+    <div
+      class="hero bg-[#2b2a3c] w-[95%]  h-auto  m-auto rounded-[50px] flex flex-col sm:flex-row overflow-hidden"
+    >
+      <div
+        class="left  h-full sm:w-[50%] p-[60px]"
+      >
+        <h2 class="text-[2.5rem]">AstroFlix</h2>
+        <form
+          
+          class="flex mt-6"
+          id="searchForm"
+          action="/search" 
+          method="GET"
+        >
+          <input
+            placeholder="Search Anime..."
+            class="h-[50px] text-black rounded-[12px] px-[20px] font-[16px] border-none w-[100%]"
+            type="text"
+            name="q"
+            id="searchQuery"
+          />
 
-        </p>
-        <br />
-        <br />
-        <br />
+          <button
+            class="w-[60px] h-[50px] mx-4 my-auto rounded-[12px] bg-[#bae2ff]"
+            type="submit"
+            id="searchButton"
+          >
+            <i
+              class="text-black font-bold ri-search-line"
+            ></i>
+          </button>
+        </form>
+        <div
+          class="top-search my-5"
+        >
+          Top search: Solo Leveling Ninja Kamui One Piece
+          Mashle: Magic and Muscles Season 2 Frieren: Beyond
+          Journey's End Classroom of the Elite III Jujutsu
+          Kaisen 2nd Season Ragna Crimson The Wrong Way to
+          Use Healing Magic The Apothecary Diaries
+        </div>
+        <button
+          class="text-black font-bold text-[1rem] w-[200px] h-[70px] my-auto rounded-[12px] bg-[#bae2ff]"
+          onclick="location.href='/home'"
+        >
+          Watch Anime
+          <i
+            class="ri-skip-right-line font-extrabold text-[20px]"
+          ></i>
+        </button\>
       </div>
-    <%- include('footer') %>
-</body>
+      <div
+        class="right hidden sm:block sm:w-[50%] relative"
+      >
+        <div
+          class="image-overlay w-full h-full absolute top-0 left-0"
+        ></div>
+        <img
+          class="z-9 w-full h-full object-cover"
+          src="/public/img/duelyst-video-games-multiple-display-anime-wallpaper(1).jpg"
+          alt=""
+        />
+      </div>
+    </div>
+
+    <div
+      class="lower-paragraph"
+    >
+      <h3
+        class="text-2xl font-semibold mb-4"
+      >
+        FAQ
+      </h3>
+      <div
+        class="faq-item bg-[#2b2a3c] p-4 mb-4 rounded-lg"
+      >
+        <h4
+          class="text-lg font-semibold"
+        >
+          Q: Is AstroFlix really free?
+        </h4>
+        <p
+          class="text-gray-300"
+        >
+          A: Yes, AstroFlix is completely free to use. We only
+          show a single ad to cover the server cost.
+        </p>
+      </div>
+      <div
+        class="faq-item bg-[#2b2a3c] p-4 mb-4 rounded-lg"
+      >
+        <h4
+          class="text-lg font-semibold"
+        >
+          Q: Is it safe to use AstroFlix?
+        </h4>
+        <p
+          class="text-gray-300"
+        >
+          A: Yes, we do our best to keep AstroFlix safe and
+          clean. We scan the ads 24/7 to make sure they are all
+          safe. If you find any suspicious ads, please let us
+          know and we will remove it immediately.
+        </p>
+      </div>
+      <div
+        class="faq-item bg-[#2b2a3c] p-4 mb-4 rounded-lg"
+      >
+        <h4
+          class="text-lg font-semibold"
+        >
+          Q: What kind of anime can I find on AstroFlix?
+        </h4>
+        <p
+          class="text-gray-300"
+        >
+          A: We have a wide variety of anime from popular, classic, to current
+          titles from all genres such as action, drama, kids, fantasy, horror,
+          mystery, police, romance, school, comedy, music, game and many more. All
+          the titles come with English subtitles or are dubbed in many languages.
+        </p>
+      </div>
+      <!-- Add more FAQ items as needed -->
+    </div>
+    <footer class="m-7 text-gray-300">
+        &copy AstroFlix. All rights reserved.
+    </footer>
+    <script>
+      const menuIcon = document.querySelector('.ri-menu-line');
+
+// Check if the element exists before adding the event listener
+if (menuIcon) {
+  menuIcon.addEventListener('click', () => {
+    console.log('Menu icon clicked');
+
+    // You can add more functionality here, such as toggling a menu
+    const menu = document.querySelector('.menu');
+    
+    menu.classList.toggle('hidden');
+    
+  });
+}
+
+console.log('added');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="/public/js/script.js"></script>
+  </body>
 </html>

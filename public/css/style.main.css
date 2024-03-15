@@ -56,7 +56,7 @@ i {
   float: right;
 }
 
-footer {
+/* footer {
   width: 100%;
   height: 50px;
   color: lightgrey;
@@ -68,7 +68,7 @@ footer {
   align-items: center;
   justify-content: center;
   border: 0.1px solid grey;
-}
+} */
 
 /* Style the menu toggle icon */
 #menu-icon {
@@ -121,7 +121,7 @@ footer {
 }
 
 .card {
-  height: auto;
+  height: 200px;
   max-height:300px;
   background: transparent;
   border: 0.1px solid #6b6967;
@@ -130,6 +130,7 @@ footer {
   max-width: 180px;
   margin: 40px 10px;
   text-decoration: none;
+  overflow: hidden;
 }
 
 .card > img {
@@ -140,6 +141,7 @@ footer {
 
 .card > .title {
   padding: 5px 10px;
+  font-size: 14px;
 }
 
 .jumper {
@@ -220,7 +222,7 @@ footer {
   margin-bottom: 1px;
 }
 
-#searchInput {
+/* #searchInput {
   margin-top: 10px;
   margin-left: 2px;
   margin-right: 2px;
@@ -229,7 +231,7 @@ footer {
   margin-bottom: 1px;
   background-color: rgb(24, 27, 31);
   color: lightgrey;
-}
+} */
 
 .nsbt {
   text-align: center;
@@ -293,7 +295,16 @@ a:visited {
   display:block;
 }
 
-.searchbox > button{
+.searchbox{
+  background: rgb(8, 8, 15);
+  border-radius: 5px;
+  padding: 30px;
+  position: absolute;
+  top: 70px;
+  right: 12px;
+}
+
+/* .searchbox > button{
   background: rgb(8, 8, 15);
   border-radius:5px;
   border-color:white;
@@ -305,7 +316,7 @@ a:visited {
   border-color:white;
   padding:7px;
   
-}
+} */
 
 .popular-anime{
   display:flex;

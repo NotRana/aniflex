@@ -31,7 +31,7 @@ This is a simple website for browsing and searching anime.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/anime-website.git
+   git clone https://github.com/notrana/astroflix
    cd anime-website
    ```
 

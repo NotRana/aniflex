@@ -1,6 +1,6 @@
-const menuicon = document.getElementById("menu-icon");
+const menuIcon = document.getElementById("menu-icon");
 
-menuicon.addEventListener("click", () => {
+menuIcon.addEventListener("click", () => {
   console.log("clicked");
 
   const memu = document.getElementsByClassName("menu")[0];
@@ -11,4 +11,5 @@ const search = document.getElementsByClassName("ri-search-line")[0]
 const searchbox = document.getElementsByClassName("searchbox")[0]
 search.addEventListener("click",()=>{
   searchbox.classList.toggle("search-active")
+  searchbox.classList.toggle("hidden")
 })

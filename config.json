@@ -2,7 +2,7 @@
   "name": "AstroFlix",
   "brand_image":"https://raw.githubusercontent.com/NotRana/aniflex/main/public/img/brand_image.png",
   "port": 3000,
-  "mongodb": "",
+  "mongodb": "mongodb+srv://azcodez9:azcodez9@cluster0.kqbv14n.mongodb.net/astroflix?retryWrites=true&w=majority",
   "secret": "azcodez9",
   "admin":{
     "username": "admin",
