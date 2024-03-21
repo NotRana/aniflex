@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Episodes</title>
+  </head>
+  <body>
+    <h1>Episode List</h1>
+    <% episodes.forEach(episode => { %>
+    <div>
+      <strong><%= episode.number %>.</strong> <%= episode.title %>
+      <a href="/admin/dashboard/updateepisode/<%= episode._id %>"
+        >edit episodes</a
+      >
+      <button
+        onclick="let ask = confirm('do you relay want to Delete this episode');console.log(ask);if(ask){fetch('/admin/dashboard/deleteepisode/<%= episode._id %>',{method:'DELETE'}).then(response =>{if(response.ok){alert('Episode Deleted Successfully')}else{alert('faild to Delete')}})}"
+      >
+        Delete Episode
+      </button>
+    </div>
+    <% }); %>
+  </body>
+</html>

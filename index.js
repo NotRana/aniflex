@@ -9,6 +9,7 @@ const upload = require("./api/upload.js");
 const animeCreate = require("./models/animeCreate.js")
 const addEp = require("./models/addEp.js")
 const anime = require("./routers/anime.js")
+const cdnapi = require('./api/cdn.js')
 let port = config.port;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -26,12 +27,14 @@ app.use("/admin", admin);
 app.use("/upload", upload);
 app.use("/anime", anime);
 
+app.use('/api/cdn', cdnapi)
+
 
 app.get("/home", async(req, res) => {
   const populer = await animeCreate.find({}).sort({views: -1}).limit(10).exec()
   const latest = await animeCreate.find({}).sort({release_date: -1}).limit(10).exec()
     
-      // populer now contains an array of objects
+      
     res.render("index", { config, populer,latest });
     
 });
@@ -39,7 +42,7 @@ app.get("/home", async(req, res) => {
 app.get("/", async(req, res) => {
   
 
-      // populer now contains an array of objects
+      
   res.render("home", { config });
 
 });
@@ -66,6 +69,20 @@ app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
   const recomend = await addEp.find({anime_id: anime_id, ep_no:{$gt: anime_ep}}).sort({ep_no:1}).limit(5).exec()
   res.render("play.ejs",{config ,anime,recomend})
 })
+
+/*
+app.get('/updateseason', async (req, res) => {
+  try {
+    let update = await addEp.updateMany({}, { $set: { season: 1 } });
+    res.send("Update successful");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating season");
+  }
+});
+*/
+// Remember to delete the route after execution
+
 
 
 app.listen(port, () => {

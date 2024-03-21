@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Update</title>
+</head>
+<body>
+    <!-- anime_id: {
+        type: String,
+        required: false,
+      },
+      ep_no:Number,
+      title:String,
+      season:Number,
+      video_url:String,
+      synopsis:String -->
+    <form id="updateForm" action="/admin/dashboard/updateepisode/<%= episode_from_db._id %>" method="POST">
+        <label for="ep_no">Episode Number</label>
+        <input type="text" value="<%= episode_from_db.ep_no %>" id="ep_no" name="ep_no">
+
+        <label for="title">Title</label>
+        <input type="text" value="<%= episode_from_db.title %>" id="title" name="title">
+
+        <label for="season">Season</label>
+        <input type="text" value="<%= episode_from_db.season %>" id="season" name="season">
+
+        <label for="video_url">Video URL</label>
+        <input type="text" value="<%= episode_from_db.video_url %>" id="video_url" name="video_url">
+
+        <label for="synopsis">Synopsis</label>
+        <textarea id="synopsis" name="synopsis"><%= episode_from_db.synopsis %></textarea>
+
+        <button type="submit">Update Episode</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('updateForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const requestBody = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/admin/dashboard/updateepisode/<%= episode_from_db._id %>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (response.ok) {
+                    alert('Episode updated successfully!');
+                    window.location.href = '/admin/dashboard'; // Redirect to dashboard after successful update
+                } else {
+                    throw new Error('Failed to update episode.');
+                }
+            } catch (error) {
+                console.error('Error updating episode:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -14,7 +14,7 @@
 <body style="background:black;">
     <%- include('nav') %>
     <div class="content">
-      <h3 style="margin-top:10px;">POPULAR</h3>
+      <h1 style="margin-top: 30px;margin-left: 13px;font-size: 25px;">POPULAR</h1>
       <div class="popular-anime" style="overflow:auto;">
         <% populer.forEach(val => { %>
           <a href="/anime/<%= val._id %>">
@@ -26,7 +26,7 @@
         <% }); %>
 
       </div>
-      <h3>LATEST</h3>
+      <h1 style="margin-top: 30px;margin-left: 13px;font-size: 25px;">LATEST</h1>
       <div class="latest-anime" style="overflow:auto;">
         <% latest.forEach(val => { %>
           <a href="/anime/<%= val._id %>">

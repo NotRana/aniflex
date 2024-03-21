@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/public/css/output.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/style.main.css">
-    <title><%= anime.name %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/public/css/output.css">
+  <link rel="stylesheet" type="text/css" href="/public/css/style.main.css">
+  <style>
+    /* Custom styles for the episode list container */
+    .episode-list-container {
+      max-height: 400px; /* Adjust as needed */
+      overflow-y: auto;
+    }
+  </style>
+  <title><%= anime.name %></title>
 </head>
 <body class="bg-black text-white">
-    <!-- Navigation -->
-    <%- include('nav') %>
+  <!-- Navigation -->
+  <%- include('nav') %>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8 flex flex-wrap justify-center">
-        <!-- Anime Poster -->
-        <img src="<%= anime.image %>" alt="Anime poster" class="w-full md:w-64 h-auto mb-4 md:mr-4">
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 flex flex-wrap justify-center">
+    <!-- Anime Poster -->
+    <img src="<%= anime.image %>" alt="Anime poster" class="w-full md:w-64 h-auto mb-4 md:mr-4">
 
-        <!-- Anime Details -->
-        <div class="flex-1 mt-4 md:mt-0">
-            <h2 class="text-3xl font-bold mb-2"><%= anime.name %></h2>
-            <p class="text-sm"><span class="font-semibold">Genres:</span> <%= anime.genres %></p>
-            <p class="text-sm"><span class="font-semibold">Release Date:</span> <%= anime.release_date %></p>
-            <p class="mt-4 text-sm"><%= anime.description %></p>
-        </div>
+    <!-- Anime Details -->
+    <div class="flex-1 mt-4 md:mt-0">
+      <h2 class="text-3xl font-bold mb-2"><%= anime.name %></h2>
+      <p class="text-sm"><span class="font-semibold">Genres:</span> <%= anime.genres %></p>
+      <p class="text-sm"><span class="font-semibold">Release Date:</span> <%= anime.release_date %></p>
+      <p class="mt-4 text-sm"><%= anime.description %></p>
+    </div>
 
-        <!-- Episode List -->
-        <div class="w-full mt-8">
-            <h3 class="text-2xl font-semibold mb-4">Episodes</h3>
+    <!-- Episode List -->
+    <div class="w-full mt-8">
+      <h3 class="text-2xl font-semibold mb-4">Episodes</h3>
+      <div class="episode-list-container">
+        <% Object.keys(seasons).forEach(season => { %>
+          <div class="mb-4">
+            <h4 class="text-lg font-semibold">Season <%= season %></h4>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <% episodes.forEach(episode => { %>
-                  <a href="/play/<%= episode.anime_id %>/<%= episode.ep_no %>">
-                    <div class="bg-[#08080F] p-4 rounded-md">
-                        <h4 class="text-lg font-semibold"><%= episode.ep_no %>: <%= episode.title %></h4>
-                        <p class="text-sm mt-2">Episode Number: <%= episode.ep_no %></p>
-                    </div>
-                  </a>
-                <% }); %>
+              <% seasons[season].forEach(episode => { %>
+                <a href="/play/<%= episode.anime_id %>/<%= episode.ep_no %>" class="episode-link">
+                  <div class="bg-[#08080F] p-4 rounded-md">
+                    <h4 class="text-lg font-semibold"><%= episode.ep_no %>: <%= episode.title %></h4>
+                  </div>
+                </a>
+              <% }); %>
             </div>
-        </div>
-    </main>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <%- include('footer') %>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
-    <script src="/public/js/script.js"></script>
+  <!-- Footer -->
+  <%- include('footer') %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="/public/js/script.js"></script>
 </body>
 </html>

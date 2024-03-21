@@ -122,10 +122,10 @@ i {
 
 .card {
   height: 200px;
-  max-height:300px;
-  background: transparent;
-  border: 0.1px solid #6b6967;
-  border-radius: 1px;
+  max-height: 300px;
+  background: rgb(8, 8, 15);
+  /* border: 0.1px solid #6b6967; */
+  border-radius: 8px; /* Adjust the border radius as needed */
   width: auto;
   max-width: 180px;
   margin: 40px 10px;
@@ -134,15 +134,21 @@ i {
 }
 
 .card > img {
-  width: 100%;
+  width: calc(100% - 4px); /* Adjust the padding here */
   padding: 2px;
   height: 80%;
+  margin: 3px auto;
+  border-radius: 6px; /* Adjust the border radius to match the card */
 }
 
 .card > .title {
-  padding: 5px 10px;
+  padding: 5px;
   font-size: 14px;
 }
+
+
+
+
 
 .jumper {
   background-color: transparent;

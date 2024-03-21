@@ -9,7 +9,7 @@ const addEp = new Schema({
   },
   ep_no:Number,
   title:String,
- 
+  season:Number,
   video_url:String,
   synopsis:String
 })

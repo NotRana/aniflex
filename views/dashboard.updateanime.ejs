@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Update</title>
+</head>
+<body>
+    <!-- name: animeName,
+            description: animeDescription,
+            image: imageUrl,
+            genres: genres,
+            release_date:release_date -->
+    <form id="updateForm" action="/admin/dashboard/updateanime" method="POST">
+        <label for="name">Anime Name</label>
+        <input type="text" value="<%= anime_from_db.name %>" id="name" name="name">
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description"><%= anime_from_db.description %></textarea>
+
+        <label for="image">Image URL</label>
+        <input type="text" value="<%= anime_from_db.image %>" id="image" name="image">
+
+        <label for="genres">Genres</label>
+        <input type="text" value="<%= anime_from_db.genres %>" id="genres" name="genres">
+
+        <label for="release_date">Release Date</label>
+        <input type="date" value="<%= anime_from_db.release_date %>" id="release_date" name="release_date">
+
+        <button type="submit">Update Anime</button>
+    </form>
+
+    <script>
+        const form = document.getElementById('updateForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            const requestBody = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/admin/dashboard/updateanime/<%= anime_from_db._id %>', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (response.ok) {
+                    alert('Anime updated successfully!');
+                    window.location.href = '/admin/dashboard'; // Redirect to dashboard after successful update
+                } else {
+                    throw new Error('Failed to update anime.');
+                }
+            } catch (error) {
+                console.error('Error updating anime:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>
