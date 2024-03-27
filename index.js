@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const admin = require("./routers/admin.js");
 const upload = require("./api/upload.js");
 const animeCreate = require("./models/animeCreate.js")
+const bannerinfo = require('./models/banner_info.js')
 const addEp = require("./models/addEp.js")
 const anime = require("./routers/anime.js")
 const cdnapi = require('./api/cdn.js')
@@ -19,9 +20,12 @@ app.use("/public", express.static(__dirname + "public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-mongoose.connect(config.mongodb || process.env.MONGODB_URI);
-
+async function connectmongo(){
+  await mongoose.connect(config.mongodb || process.env.MONGODB_URI);
+  console.log('MOngoDB Connected!');
+  
+}
+connectmongo()
 // Router Here
 app.use("/admin", admin);
 app.use("/upload", upload);
@@ -33,16 +37,15 @@ app.use('/api/cdn', cdnapi)
 app.get("/home", async(req, res) => {
   const populer = await animeCreate.find({}).sort({views: -1}).limit(10).exec()
   const latest = await animeCreate.find({}).sort({release_date: -1}).limit(10).exec()
-    
-      
-    res.render("index", { config, populer,latest });
+  const banner_info = await bannerinfo.findById('6602fb578c83a242d67264cb')
+  
+  
+    res.render("index", { config, populer,latest ,banner_info});
     
 });
 
 app.get("/", async(req, res) => {
-  
-
-      
+     
   res.render("home", { config });
 
 });
@@ -69,6 +72,12 @@ app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
   const recomend = await addEp.find({anime_id: anime_id, ep_no:{$gt: anime_ep}}).sort({ep_no:1}).limit(5).exec()
   res.render("play.ejs",{config ,anime,recomend})
 })
+
+
+app.get("/browse", async (req, res) => {
+  const animeList = await animeCreate.find({}).sort({name: 1}).exec();
+  res.render("browse_anime.ejs", { config, animeList });
+});
 
 /*
 app.get('/updateseason', async (req, res) => {

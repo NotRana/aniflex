@@ -1,0 +1,22 @@
+.ri-search-line{
+    cursor:pointer;
+  }
+  .searchbox{
+    display:none;
+    position:absolute;
+    top:12px;
+    right:95px;
+  }
+  .search-active{
+    display:block;
+  }
+  
+  .searchbox{
+    z-index: 41;
+    
+    border-radius: 5px;
+    /* padding: 30px; */
+    position: absolute;
+    top: 70px;
+    right: 12px;
+  }

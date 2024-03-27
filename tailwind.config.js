@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./views/**/*.{ejs,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        bg_color: "#141416",
+        card_bg: "#23262f"
+      }
+    },
   },
   plugins: [],
 }

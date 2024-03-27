@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <!-- Include Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Dark Theme Styles -->
+  <style>
+    input{
+      
+      background:transparent;
+    }
+    textarea{
+      
+      background:transparent;
+    }
+    body {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    .sidebar {
+      background-color: #2d3748;
+      transition: width 0.3s;
+    }
+    .sidebar-item {
+      transition: background-color 0.3s;
+    }
+    .sidebar-item:hover {
+      background-color: #4a5568;
+    }
+    .sidebar-item.active {
+      background-color: #4a5568;
+    }
+    @media (max-width: 768px) {
+      #sidebarToggle{
+        display: block;
+      }
+      .sidebar {
+        display: none;
+        width: 64px;
+      }
+      .sidebar-open {
+        display: block;
+        width: 240px;
+      }
+      .sidebar-open .sidebar-close {
+
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased">
+
+  <!-- Sidebar -->
+  <%- include('sider') %>
+
+    <!-- Main Content -->
+    <div class="flex flex-col flex-1">
+      <div class="bg-gray-800 px-4 py-3">
+        <!-- Responsive Sidebar Toggle Button -->
+        <button class="text-white focus:outline-none md:hidden" id="sidebarToggle">
+          <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+        <h2 class="text-lg font-semibold text-white">Update Header Anime (what ever  it is)</h2>
+      </div>
+      <div class="p-6 flex-1">
+        <!-- Add New Anime Form -->
+        <form id="addAnimeForm" class="bg-grey text-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <label for="animeName" class="block text-white text-sm font-bold mb-2">Anime Name</label>
+            <input id="animeName" name="animeName" type="text" placeholder="Enter anime name" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" value="<%= banner_info.name %>" required>
+          </div>
+          <div class="mb-4">
+            <label for="animeImage" class="block text-white text-sm font-bold mb-2">Anime Image</label>
+            <input id="animeImage" name="animeImage" type="text" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" value="<%= banner_info.image %>"required>
+          </div>
+          <div class="mb-4">
+            <label for="animeurl" class="block text-white text-sm font-bold mb-2">Anime Url</label>
+            <input id="animeurl" name="animeurl" type="text"  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" value="<%= banner_info.anime_url %>" required>
+          </div>
+          <div class="mb-6">
+            <label for="animeDescription" class="block text-white text-sm font-bold mb-2">Anime Description</label>
+            <textarea id="animeDescription" name="animeDescription"  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"  required><%= banner_info.description %></textarea>
+          </div>
+
+          
+          
+          <div class="flex items-center justify-between">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
+            
+            <!-- Success Message Component -->
+      
+          </div>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to toggle sidebar -->
+  <script>
+    const sidebarToggle = document.getElementById("sidebarToggle");
+    const sidebarClose = document.getElementById("sidebarClose");
+    const sidebar = document.querySelector(".sidebar");
+    const mainContent = document.querySelector(".main-content");
+
+    sidebarToggle.addEventListener("click", () => {
+      sidebar.classList.toggle("sidebar-open");
+      // mainContent.classList.toggle("main-content-open");
+    });
+
+    sidebarClose.addEventListener("click", () => {
+      sidebar.classList.remove("sidebar-open");
+      mainContent.classList.remove("main-content-open");
+    });
+
+    const addAnimeForm = document.getElementById("addAnimeForm");
+    addAnimeForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      
+      const animeName = document.getElementById("animeName").value;
+      const animeDescription = document.getElementById("animeDescription").value;
+      const animeImage = document.getElementById("animeImage").value;
+      const anime_url = document.getElementById('animeurl').value;
+      
+      try {
+        
+        const response = await fetch('/admin/dashboard/banner_info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: animeName,
+            description: animeDescription,
+            image: animeImage,
+            anime_url:anime_url
+          })
+        });
+
+        if (response.ok) {
+          console.log('Update successfully');
+          alert("Update uploaded successfully")
+          
+        } else {
+          alert('Failed to Update')
+          throw new Error('Failed to Update');
+        }
+      } catch (error) {
+        alert('Error in Updating:', error)
+        console.error('Error in Updating:', error);
+      }
+    });
+
+    // async function get_cdn() {
+    //   let response = await fetch("/api/cdn");
+    //   let data = await response.json();
+    //   return data.cdn;
+    // }
+
+    
+
+    // async function uploadImage(imageFile) {
+    //   try {
+    //     const formData = new FormData();
+    //     formData.append('image', imageFile);
+    //     const cdn = await get_cdn()
+    //     console.log(cdn)
+    //     const response = await fetch(cdn, {
+    //       method: 'POST',
+    //       body: formData
+    //     });
+
+    //     if (response.ok) {
+    //       const data = await response.json();
+    //       console.log(data.imageUrl);
+    //       return data.imageUrl;
+    //     } else {
+    //       throw new Error('Failed to upload image');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error uploading image:', error);
+    //     return null;
+    //   }
+    // }
+  </script>
+
+</body>
+</html>

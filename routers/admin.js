@@ -4,6 +4,7 @@ const session = require("express-session");
 const config = require("../config.json");
 const animeCreate = require("../models/animeCreate.js");
 const addEp = require("../models/addEp.js");
+const bannerinfo = require('../models/banner_info.js')
 const { generateKeySync } = require("crypto");
 const router = express.Router();
 
@@ -215,6 +216,32 @@ router.delete('/dashboard/deleteepisode/:id', async (req, res) => {
       res.status(500).json({ error: 'An error occurred while deleting episode.' });
   }
 });
+
+router.get('/dashboard/banner_info', async(req,res)=>{
+  const banner_info = await bannerinfo.findOne({_id:'6602fb578c83a242d67264cb'})
+  console.log(banner_info);
+  
+  res.render("settings.ejs",{banner_info})
+})
+
+router.post("/dashboard/banner_info", async (req, res) => {
+  const banner_info = await bannerinfo.findOne({_id:'6602fb578c83a242d67264cb'})
+  const name = req.body.name;
+  const image = req.body.image;
+  const description = req.body.description;
+  const anime_url = req.body.anime_url;
+  const id = '6602fb578c83a242d67264cb'
+  const banner_infoo = {
+    name:name,
+    description:description,
+    image:image,
+    anime_url: anime_url
+  }
+  await bannerinfo.findByIdAndUpdate(id,banner_infoo,{ new: true } )
+  console.log(name, image, description)
+  res.render("settings.ejs", { banner_info})
+});
+
 
 
 module.exports = router;

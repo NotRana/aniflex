@@ -1,44 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/style.main.css">
-    <link rel="stylesheet"  href="/public/css/output.css">
-    <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/css/output.css" />
+    <link rel="stylesheet" href="/public/css/search.css">
+    <link rel="stylesheet" href="/public/css/style.css" />
     <title><%= config.name %></title>
-</head>
-<body style="background:black;">
-    <%- include('nav') %>
-    <div class="content">
-      <h1 style="margin-top: 30px;margin-left: 13px;font-size: 25px;">POPULAR</h1>
-      <div class="popular-anime" style="overflow:auto;">
-        <% populer.forEach(val => { %>
-          <a href="/anime/<%= val._id %>">
-            <div class="card">
-              <img src="<%= val.image %>" alt="<%= val.name %>">
-              <p class="title"><%= val.name %></p>
+    <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
+  </head>
+  <body class="bg-bg_color text-white">
+    <main>
+      <nav
+        class="w-full fixed bottom-0 left-0 h-[90px] border-t-2 z-40 border-[#353945] bg-bg_color xl:hidden"
+      >
+        <ul class="flex justify-start items-center h-full w-full">
+          <li><i class="ri-search-line text-white text-[30px] m-10"></i></li>
+          <li onclick="window.location.href = '/home'" class="bg-[#23262f] rounded-lg ">
+            <i class="ri-home-line text-white text-[30px] m-10"></i>
+          </li>
+          <li onclick="window.location.href = '/browse'"><i class="ri-global-line text-white text-[30px] m-10"></i></li>
+        </ul>
+      </nav>
+      <div class="main-content flex">
+            <div class="desktop-nav hidden xl:block h-[100vh] w-[5%] bg-bg_color sticky top-0 left-0  border-r-2 border-[#353945]">
+                <ul class="flex flex-col items-center h-full w-full">
+                    <img src="<%= config.brand_image %>" alt="">
+                    <li><i class="ri-search-line text-white text-[30px]"></i></li>
+                    <li onclick="window.location.href = '/home'" class="bg-[#23262f] rounded-xl">
+                      <i class="ri-home-line text-white text-[30px] m-3"></i>
+                    </li>
+                    <li onclick="window.location.href = '/browse'"><i class="ri-global-line text-white text-[30px]"></i></li>
+                </ul>
             </div>
-          </a>
-        <% }); %>
+            <div class="right-section w-full xl:w-[95%]">
 
-      </div>
-      <h1 style="margin-top: 30px;margin-left: 13px;font-size: 25px;">LATEST</h1>
-      <div class="latest-anime" style="overflow:auto;">
-        <% latest.forEach(val => { %>
-          <a href="/anime/<%= val._id %>">
-          <div class="card">
-            <img src="<%= val.image %>" alt="jgfkjfbsj">
-            <p class="title"><%= val.name %></p>
-          </div>
-          </a>
-        <% }); %>
-        
-      </div>
-    </div>
-    <%- include('footer') %>
-</body>
+                <form id="searchForm" class="searchbox hidden p-[30px] bg-card_bg sm:p-[19px]" action="/search" method="GET">
+                    <input type="text" id="searchQuery" name="q" class="border-white bg-white p-2 rounded-lg m-2 text-black" placeholder="Search Anime....">
+                    <button type="submit" id="searchButton" class="rounded-lg bg-[#bae2ff] p-2 text-black">search</button>
+                </form>
+                <div
+                    class="top-banner w-full h-[280px] bg-bg_color text-white relative xl:h-[400px]"
+                >
+                    <img
+                    src="<%= banner_info.image %>"
+                    alt=""
+                    class="w-full h-full object-cover z-0 md"
+                    />
+                    <div class="black-shade"></div>
+                    <div
+                    class="m-10 text-are absolute top-0 left-0 w-[50%] z-[11] h-full flex flex-col justify-center sm:justify-start"
+                    >
+                    <h3 class="text-[30px] lg:text-[40px] xl:text-[50px]"><%= banner_info.name %></h3>
+                    <p class="text-[#777E90] text-[11px]  md:text-[15px] xl:text-[20px]">
+                        <%= banner_info.description %>
+                    </p>
+                    <button onclick="window.location.href = '<%= banner_info.anime_url %>'" class="mt-5 w-[120px] h-[50px] bg-blue-600 rounded-xl">
+                        Watch Now <i class="ri-play-line text-[20px]"></i>
+                    </button>
+                    </div>
+                </div>
+                <div
+                    class="popular-anime w-full h-[355px] mt-7 z-20 relative"
+                >
+                    <div class="controls z-30 absolute top-10 left-2">
+                        <i class="prev bg-black text-white px-3 py-1 rounded-lg ri-arrow-left-line"></i>
+                    </div>
+                    <div class="controls z-30 absolute top-10 right-2">
+                        <i class="next bg-black text-white px-3 py-1 rounded-lg ri-arrow-right-line"></i>
+                    </div>
+                    <div class="card-container flex overflow-x-auto">
+                        <% populer.forEach(val => { %>
+                        <a href="/anime/<%= val._id %>">
+                        <div
+                    class="card h-full w-[300px] max-w-[300px] bg-card_bg mx-[14px] rounded-xl"
+                    >
+                            <img
+                                class="h-[80%] object-cover w-full"
+                                src="<%= val.image %>"
+                                alt=""
+                            />
+                            <div class="text-are w-full p-[11px] px-[12px] overflow-hidden">
+                                <div class="title"><%= val.name %></div>
+                                <div class="generes text-[#777E90]"><%= val.genres %></div>
+                            </div>
+                        </div>
+                        </a>
+                        <% }); %>
+                    
+                    </div>
+                    
+                </div>
+                <h3 class="mx-5 my-2 text-[23px] font-bold">LATEST ANIME</h3>
+                <p class="text-[#777E90] mx-5">The Most Recent Anime</p>
+                <div
+                    class="popular-anime w-full h-[355px] mt-7 z-20 relative"
+                >
+                    
+                    <div class="controls z-30 absolute top-10 left-2">
+                        <i class="prev bg-black text-white px-3 py-1 rounded-lg ri-arrow-left-line"></i>
+                    </div>
+                    <div class="controls z-30 absolute top-10 right-2">
+                        <i class="next bg-black text-white px-3 py-1 rounded-lg ri-arrow-right-line"></i>
+                    </div>
+                    <div class="card-container flex overflow-x-auto">
+                        <% latest.forEach(val => { %>
+                        <a href="/anime/<%= val._id %>">
+                        <div
+                    class="card h-full w-[300px] max-w-[300px] bg-card_bg mx-[14px] rounded-xl"
+                    >
+                            <img
+                                class="h-[80%] object-cover w-full"
+                                src="<%= val.image %>"
+                                alt=""
+                            />
+                            <div class="text-are w-full p-[11px] px-[12px] overflow-hidden">
+                                <div class="title"><%= val.name %></div>
+                                <div class="generes text-[#777E90]"><%= val.genres %></div>
+                            </div>
+                        </div>
+                        </a>
+                        <% }); %>
+                    </div>
+                    
+                </div>
+                <br><br><br><br><br><br>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="/public/js/script.js"></script>
+  </body>
 </html>
