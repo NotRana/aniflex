@@ -17,25 +17,39 @@ router.get("/:id", async (req, res) => {
     }
 
     // Group episodes by season
+    const season_no = []
     const seasons = {};
     episodes.forEach(episode => {
       if (!seasons[episode.season]) {
         seasons[episode.season] = [];
+        season_no.push(episode.season)
       }
       seasons[episode.season].push(episode);
+    
     });
+
+
 
     // Update the views count
     await animeCreate.updateOne({ _id: animeid }, { $inc: { views: 1 } });
 
     // Send the updated anime object and episodes in the response
-    res.render("animedetail.ejs", { config, anime, episodes, seasons });
+    res.render("animedetail.ejs", { config, anime,seasons,season_no, episodes,animeid });
   } catch (error) {
     console.error("Error fetching anime:", error);
     res.status(500).send("Error fetching anime");
   }
 });
 
+
+router.get('/byseasons/:animeid/:season',async (req,res)=>{
+  const anime_id = req.params.animeid;
+  const season = req.params.season;
+
+  const anime = await addEp.find({anime_id:anime_id,season:season}).sort({ ep_no: 1 }).exec()
+  res.json(anime)
+
+})
 
 
 module.exports = router
