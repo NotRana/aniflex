@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/public/css/output.css" />
-  <link rel="stylesheet" href="/public/css/search.css">
-  <link rel="stylesheet" href="/public/css/style.css" />
-  <title><%= config.name %></title>
-  <link rel="icon" type="image/x-icon" href="<%= config.brand_image %>">
-</head>
-<body class="bg-bg_color text-white">
-  <main>
-    <nav class="w-full fixed bottom-0 left-0 h-[90px] border-t-2 z-40 border-[#353945] bg-bg_color xl:hidden">
-      <ul class="flex justify-start items-center h-full w-full">
-        <li><i class="ri-search-line text-white text-[30px] m-10"></i></li>
-        <li onclick="window.location.href = '/home'" class="bg-[#23262f] rounded-lg ">
-          <i class="ri-home-line text-white text-[30px] m-10"></i>
-        </li>
-        <li onclick="window.location.href = '/browse'"><i class="ri-global-line text-white text-[30px] m-10"></i></li>
-      </ul>
-    </nav>
-    <div class="main-content flex">
-      <div class="desktop-nav hidden xl:block h-[100vh] w-[5%] bg-bg_color sticky top-0 left-0 border-r-2 border-[#353945]">
-        <ul class="flex flex-col items-center h-full w-full">
-          <img src="<%= config.brand_image %>" alt="">
-          <li><i class="ri-search-line text-white text-[30px]"></i></li>
-          <li onclick="window.location.href = '/home'" class="bg-[#23262f] rounded-xl">
-            <i class="ri-home-line text-white text-[30px] m-3"></i>
-          </li>
-          <li onclick="window.location.href = '/browse'" ><i class="ri-global-line text-white text-[30px]"></i></li>
-        </ul>
-      </div>
-      <div class="right-section w-full xl:w-[95%]">
-        <form id="searchForm" class="searchbox hidden p-[30px] bg-card_bg sm:p-[19px]" action="/search" method="GET">
-          <input type="text" id="searchQuery" name="q" class="border-white bg-white p-2 rounded-lg m-2 text-black" placeholder="Search Anime....">
-          <button type="submit" id="searchButton" class="rounded-lg bg-[#bae2ff] p-2 text-black">search</button>
-        </form>
+<%- include('nav') %>
         <h3 class="mx-5 my-2 text-[23px] font-bold">BROWSE</h3>
         <p class="text-[#777E90] mx-5">Browse Your Favorite Anime</p>
         <div class="grid grid-cols-1 sm:grid-cols-4 *:m-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 mt-7 z-20 relative">
@@ -53,11 +15,4 @@
           
           <% }); %>
         </div>
-        <br><br><br><br><br><br>
-      </div>
-    </div>
-  </main>
-   <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-  <script src="/public/js/script.js"></script>
-</body>
-</html>
+        <%- include('footer') %>

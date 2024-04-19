@@ -11,6 +11,8 @@ const bannerinfo = require('./models/banner_info.js')
 const addEp = require("./models/addEp.js")
 const anime = require("./routers/anime.js")
 const cdnapi = require('./api/cdn.js')
+const boardmark_api = require('./api/boardmark.js');
+const { createHash } = require("crypto");
 let port = config.port;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -20,16 +22,33 @@ app.use("/public", express.static(__dirname + "public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-async function connectmongo(){
-  await mongoose.connect(config.mongodb || process.env.MONGODB_URI);
-  console.log('MOngoDB Connected!');
+// async function connectmongo(){
+//   try{
+//     await mongoose.connect(config.mongodb || process.env.MONGODB_URI);
+//     console.log('MongoDB Connected!');
+
+//   }
+//   catch(error){
+//     console.log('Faild To Connect MongoDb');
+    
+//   }
   
-}
-connectmongo()
+// }
+
+mongoose.connect(config.mongodb || process.env.MONGODB_URI).then(msg =>{
+  console.log('Connected To DB');
+})
+.catch((error)=>{
+  console.log('Faild To Connect DB')
+
+})
+
+
 // Router Here
 app.use("/admin", admin);
 app.use("/upload", upload);
 app.use("/anime", anime);
+app.use('/api/boardmark', boardmark_api)
 
 app.use('/api/cdn', cdnapi)
 
@@ -64,12 +83,13 @@ app.get("/search", async (req, res) => {
   }
 });
 
-app.get("/play/:anime_id/:anime_ep",async(req,res)=>{
+app.get("/play/:anime_id/:video_id/:anime_ep",async(req,res)=>{
   const anime_id = req.params.anime_id;
   const anime_ep = req.params.anime_ep;
-  const anime = await addEp.findOne({anime_id:anime_id,ep_no:anime_ep}).exec()
+  const video_id = req.params.video_id;
+  const anime = await addEp.findOne({anime_id:anime_id,ep_no:anime_ep,_id:video_id}).exec()
   // console.log(anime)
-  const recomend = await addEp.find({anime_id: anime_id, ep_no:{$gt: anime_ep}}).sort({ep_no:1}).limit(5).exec()
+  const recomend = await addEp.find({anime_id: anime_id,season:anime.season, ep_no:{$gt: anime_ep}}).sort({ep_no:1}).limit(5).exec()
   res.render("play.ejs",{config ,anime,recomend})
 })
 
@@ -93,6 +113,13 @@ app.get('/updateseason', async (req, res) => {
 // Remember to delete the route after execution
 
 
+app.get('/boardmark',(req,res)=>{
+  res.render('boardmark.ejs',{config})
+})
+
+app.get('/*',(req,res)=>{
+  res.send('404rs')
+})
 
 app.listen(port, () => {
   console.log(`anime website is runnig on ${port} `);

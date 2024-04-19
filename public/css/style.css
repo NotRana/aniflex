@@ -191,9 +191,9 @@
 }
 
 /* Apply animation to card elements */
-.card {
-    opacity: 0; /* Start with cards hidden */
-}
+/* .card {
+    opacity: 0;
+} */
 
 
 .top-banner {
@@ -227,3 +227,6 @@
 }
 
 
+.svg{
+    transition: all 0.5s ease;
+}

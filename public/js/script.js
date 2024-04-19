@@ -70,12 +70,13 @@ document.addEventListener("DOMContentLoaded", function() {
   // Loop through each card and apply animation with delay
   cards.forEach(function(card, index) {
       card.style.opacity = "0"; // Start with cards hidden
+      console.log("script is working")
       card.style.animation = "slideInFromBottom 0.5s ease-out forwards";
       card.style.animationDelay = (index * 0.1) + "s"; // Adjust delay as needed
   });
 });
 
-const searchButtons = document.querySelectorAll(".ri-search-line");
+const searchButtons = document.querySelectorAll(".ri-search-2-line");
 const searchbox = document.getElementsByClassName("searchbox")[0];
 
 searchButtons.forEach(button => {
@@ -85,3 +86,4 @@ searchButtons.forEach(button => {
     searchbox.classList.toggle("hidden");
   });
 });
+

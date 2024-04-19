@@ -1,0 +1,32 @@
+<%- include('nav') %>
+
+<h3 class="mx-5 my-2 text-[23px] font-bold">BoardMark</h3>
+        <p class="text-[#777E90] mx-5">Your All BoardMarked Anime</p>
+        <div class="grid grid-cols-1 sm:grid-cols-4 *:m-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 mt-7 z-20 relative boardmark">
+          
+          
+          
+          
+        </div>
+<script>
+    const boardmark = document.querySelector('.boardmark')
+    const anime_list = JSON.parse(window.localStorage.getItem('boardmark_anime'))
+    let html = '';
+    anime_list.forEach(async element => {
+        
+       const response = await fetch(`/api/boardmark/${element}`)
+       const data = await response.json()
+       html += `<a href="/anime/${data._id}">
+            <div class="card h-full bg-card_bg rounded-xl">
+              <img class="h-[80%] object-cover w-full" src="${data.image}" alt="">
+              <div class="text-are p-[11px] px-[12px] overflow-hidden">
+                <div class="title">${data.name}</div>
+                <div class="generes text-[#777E90]">${data.genres}</div>
+              </div>
+            </div>
+          </a>`
+          boardmark.innerHTML = html
+    });
+    
+</script>
+<%- include('footer') %>
