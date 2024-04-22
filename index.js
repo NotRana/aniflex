@@ -22,26 +22,30 @@ app.use("/public", express.static(__dirname + "public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// async function connectmongo(){
-//   try{
-//     await mongoose.connect(config.mongodb || process.env.MONGODB_URI);
-//     console.log('MongoDB Connected!');
+async function connectmongo(){
+  try{
+    await mongoose.connect(config.mongodb || process.env.MONGODB_URI);
+    console.log('MongoDB Connected!');
 
-//   }
-//   catch(error){
-//     console.log('Faild To Connect MongoDb');
+  }
+  catch(error){
+    console.log('Faild To Connect MongoDb');
     
-//   }
+  }
   
-// }
+}
 
-mongoose.connect(config.mongodb || process.env.MONGODB_URI).then(msg =>{
-  console.log('Connected To DB');
+connectmongo().then(msg=>{
+  console.log('Connected')
 })
-.catch((error)=>{
-  console.log('Faild To Connect DB')
 
-})
+// mongoose.connect(config.mongodb || process.env.MONGODB_URI).then(msg =>{
+//   console.log('Connected To DB');
+// })
+// .catch((error)=>{
+//   console.log('Faild To Connect DB')
+
+// })
 
 
 // Router Here
