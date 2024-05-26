@@ -1,6 +1,6 @@
 {
   "name": "AstroFlix",
-  "brand_image":"/public/img/brand_image.png",
+  "brand_image":"/img/brand_image.png",
   "port": 3000,
   "mongodb": "",
   "secret": "azcodez9",
