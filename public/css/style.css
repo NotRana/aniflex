@@ -162,21 +162,21 @@
 
 /* Initially hide the controls icons */
 .controls > i {
-    display: none;
+    display: block;
     border-radius: 50%;
     padding: 12px;
     background: #000000ab;
     border: 1px solid #ffffff42;
     cursor: pointer;
-    opacity: 0; /* Start with opacity 0 */
+    opacity: 1; /* Start with opacity 0 */
     transition: opacity 0.3s ease; /* Transition for opacity */
 }
 
 /* Show controls icons when hovering over the card container */
-.popular-anime:hover .controls > i {
+/* .popular-anime:hover .controls > i {
     display: block;
-    opacity: 1; /* Show with transition */
-}
+    opacity: 1; 
+} */
 
 /* Keyframes for card animation */
 @keyframes slideInFromBottom {

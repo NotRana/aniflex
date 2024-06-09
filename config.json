@@ -5,8 +5,8 @@
   "mongodb": "",
   "secret": "azcodez9",
   "admin":{
-    "username": "admin",
-    "password": "admin"
+    "username": "astroadmin",
+    "password": "asadpass"
   },
   "upload_api":"https://rightful-possible-rainforest.glitch.me/upload"
 }
